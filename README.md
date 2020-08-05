@@ -53,6 +53,23 @@ Nmap also allows you to run UDP scans and to scan IPv6 addresses. To add these a
 $ docker run -v $(CURDIR)/shared:/shared flan_scan <Nmap-flags>
 ```
 
+Pushing Results to your e-mail
+----------------------------
+
+Flan Scan now supports HTML e-mail reports. This way automated reports are more useful for smaller users. Flan Scan requires 5 environment variables to push results to  your e-mail. The first is `upload` which takes the values `email`. The second is `smtp_from` and the value should be the senders e-mail address. The third is `smtp_to` and the value should be the receiver e-mail address. The forth is `smtp_server` and should be the hostname of your SMTP server. The fifth is `format` and requires to be `html` for the email method to work as it uses the HTML report for the email body. After running `make build` run the container setting the environment variables like so:
+```bash
+$ docker run --name <container-name> \
+             -v $(CURDIR)/shared:/shared \
+             -e upload=email \
+             -e smtp_from_name=<smtp-from-name> \
+             -e smtp_from=<smtp-from-email> \
+             -e smtp_to=<smtp-to-email> \
+             -e smtp_server=<smtp-server-hostname> \
+             -e smtp_server_port=<smtp-server-port> \
+             -e format=html \
+             flan_scan
+```
+
 Pushing Results to the Cloud
 ----------------------------
 

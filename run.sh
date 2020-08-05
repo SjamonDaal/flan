@@ -30,6 +30,9 @@ function upload {
     elif [ $upload = "gcp" ]
     then
         python /gcp_push.py $1
+    elif [[ $upload = "email" && $report_extension = "html" ]]
+    then
+        python /email_push.py $1
     fi
 }
 
